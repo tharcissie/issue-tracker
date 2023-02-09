@@ -103,18 +103,19 @@
 }
 
 .sidenav-nav .sidenav-nav-item:hover .sidenav-nav-link {
-    background-color: #f5e3cb;
+    background-color: #ffebe7;
     color: #6B7280;
 }
 
 .active {
-    background-color: #f5e3cb;
+    background-color: #ffebe7;
 }
 
 .footer {
     position: absolute;
     padding: 0.938rem 0.938rem 0 0.938rem;
     bottom: 3%;
+    cursor: pointer;
 }
 
 .footer span {

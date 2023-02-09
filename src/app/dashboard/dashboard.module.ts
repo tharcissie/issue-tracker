@@ -8,6 +8,7 @@ import { BodyComponent } from './body/body.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { IssuesComponent } from './issues/issues.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +17,13 @@ import { IssuesComponent } from './issues/issues.component';
     BodyComponent,
     HomepageComponent,
     ProjectsComponent,
-    IssuesComponent
+    IssuesComponent,
+    UsersComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
     DashboardRoutingModule,
   ]
 })

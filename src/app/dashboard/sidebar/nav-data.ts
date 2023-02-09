@@ -14,4 +14,9 @@ export const navbarData = [
         icon: 'fa fa-bug  fa-1x mx-3',
         label: 'Issues'
     },
+    {
+        routeLink: 'users',
+        icon: 'fa fa-users  fa-1x mx-3',
+        label: 'Users'
+    },
 ];
