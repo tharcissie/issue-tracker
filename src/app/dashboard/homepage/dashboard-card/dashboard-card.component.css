@@ -1,0 +1,14 @@
+.card{
+    min-height: 20vh;
+}
+
+.cardIcon{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ffebe7;
+}
+
+.iconColor{
+   color: #FF7B5F
+}

@@ -1,1 +1,8 @@
-<p>homepage works!</p>
+<div class="row">
+    <div class="col-md-4 mt-3" *ngFor="let data of cardData">
+        <app-dashboard-card [icon] ="data.icon" [label] = 'data.label' [number] = 'data.number'></app-dashboard-card>
+    </div> 
+</div>
+<div  class="card p-5 mt-5">
+    <canvasjs-chart [options]="chartOptions" [styles]="{width: '85%', height:'360px'}"></canvasjs-chart>    
+</div> 

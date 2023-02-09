@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardRoutingModule } from './dashboard-routing.module';
@@ -9,7 +9,10 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { IssuesComponent } from './issues/issues.component';
 import { UsersComponent } from './users/users.component';
+import { DashboardCardComponent } from './homepage/dashboard-card/dashboard-card.component';
 
+import * as CanvasJSAngularChart from '../../assets/canvasjs.angular.component';
+var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 @NgModule({
   declarations: [
     DashboardRoutingModule.components,
@@ -18,7 +21,9 @@ import { UsersComponent } from './users/users.component';
     HomepageComponent,
     ProjectsComponent,
     IssuesComponent,
-    UsersComponent
+    UsersComponent,
+    DashboardCardComponent,
+    CanvasJSChart,
   ],
   imports: [
     CommonModule,
