@@ -1,0 +1,27 @@
+<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed': ''">
+    <div class="logo-container">
+        <button class="logo" (click)="toggleCollapse()"><i class="fa fa-podcast" aria-hidden="true"></i></button>
+        <div class="logo-text text-muted" @fadeInOut *ngIf="collapsed">IssueTracker</div>
+        <button class="btn-close" @rotate *ngIf="collapsed" (click)="closeSidenav()">
+            <i aria-hidden="true" class="fa fa-close"></i>
+        </button>
+    </div>
+    <ul class="sidenav-nav">
+        <li class="sidenav-nav-item" *ngFor="let data of navData">
+            <a class="sidenav-nav-link" [routerLink]="[data.routeLink]" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i aria-hidden="true" [class]="data.icon"></i>
+                <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+                    {{data.label}}
+                </span>
+            </a>
+        </li>
+    </ul>
+    <hr class="line" />
+    <div class="footer">
+        <a class="text-muted" [routerLink]="" (click)="logout()">
+            <i class="fa fa-sign-out mx-3" aria-hidden="true"></i>
+            <span @fadeInOut *ngIf="collapsed">Logout</span>
+        </a>
+    </div>
+</div>

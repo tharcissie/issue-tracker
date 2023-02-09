@@ -1,0 +1,17 @@
+export const navbarData = [
+    {
+        routeLink: 'dashboard',
+        icon: 'fa fa-bar-chart fa-1x mx-3',
+        label: 'Dashboard'
+    },
+    {
+        routeLink: 'projects',
+        icon: 'fa fa-file fa-1x mx-3',
+        label: 'Projects'
+    },
+    {
+        routeLink: 'issues',
+        icon: 'fa fa-bug  fa-1x mx-3',
+        label: 'Issues'
+    },
+];

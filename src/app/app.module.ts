@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
 import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
@@ -28,7 +27,6 @@ import { AuthGuard } from './_guards/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
     LoginComponent
   ],
   imports: [
