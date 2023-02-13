@@ -52,7 +52,7 @@ import { HandleError } from './core/handleError';
     MdbTabsModule,
     MdbTooltipModule,
     MdbValidationModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [
     AuthGuard,

@@ -12,6 +12,7 @@ import { UsersComponent } from './users/users.component';
 import { DashboardCardComponent } from './homepage/dashboard-card/dashboard-card.component';
 
 import * as CanvasJSAngularChart from '../../assets/canvasjs.angular.component';
+import { ModalComponent } from './modal/modal.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     UsersComponent,
     DashboardCardComponent,
     CanvasJSChart,
+    ModalComponent,
   ],
   imports: [
     CommonModule,
