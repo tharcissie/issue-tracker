@@ -1,0 +1,114 @@
+<div class="card p-5 table-responsive">
+  <table class="table table-hover text-nowrap">
+    <thead>
+      <tr>
+        <th scope="col"><b>Name</b></th>
+        <th scope="col"><b>Key</b></th>
+        <th scope="col"><b>Is Private</b></th>
+        <th scope="col"><b>Project Type Key</b></th>
+        <th scope="col"><b>Simplified</b></th>
+        <th scope="col"><b>Style</b></th>
+        <th scope="col"><b>Action</b></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data">
+        <th scope="row">{{ item.name }}</th>
+        <td>{{ item.key }}</td>
+        <td>
+          <span
+            *ngIf="item.isPrivate"
+            class="badge badge-success rounded-pill d-inline"
+            >{{ item.isPrivate }}</span
+          >
+          <span
+            *ngIf="!item.isPrivate"
+            class="badge badge-danger rounded-pill d-inline"
+            >{{ item.isPrivate }}</span
+          >
+        </td>
+        <td>{{ item.projectTypeKey }}</td>
+        <td>
+          <span
+            *ngIf="item.simplified"
+            class="badge badge-success rounded-pill d-inline"
+            >{{ item.simplified }}</span
+          >
+          <span
+            *ngIf="!item.simplified"
+            class="badge badge-warning rounded-pill d-inline"
+            >{{ item.simplified }}</span
+          >
+        </td>
+        <td>{{ item.style }}</td>
+        <td>
+          <button class="btn btn-primay btn-sm btn-rounded" (click)="createIssueModal(myModal)">Report Issue</button>
+        </td>
+        <ng-template #myModal>
+          <div class="modal-header">
+            <h4 class="modal-title">Create An Issue</h4>
+            <a
+              role="button"
+              class="close"
+              aria-label="Close"
+              (click)="closeModal()"
+            >
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="myForm" (ngSubmit)="createIssue(item.id)">
+              <div class="form-group p-3">
+                <label for="title">Title</label>
+                <input
+                  type="text"
+                  id="title"
+                  class="form-control"
+                  formControlName="title"
+                />
+              </div>
+              <div class="form-group p-3">
+                <label for="description">Description</label>
+                <textarea
+                  id="description"
+                  class="form-control"
+                  formControlName="description"
+                ></textarea>
+              </div>
+
+              <!-- <div class="form-group">
+                <label for="file">File</label>
+                <input
+                  type="file"
+                  id="file"
+                  class="form-control-file"
+                  (change)="onFileSelected($event)"
+                />
+              </div> -->
+              <div class="d-flex justify-content-end p-3 mt-2">
+                <button
+                  type="button"
+                  class="btn btn-dark-outline mx-3"
+                  (click)="closeModal()"
+                >
+                  Cancel
+                </button>
+                <button type="submit" class="btn btn-primary">
+                  <span *ngIf="createLoading">
+                    <span
+                      class="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    Loading...
+                  </span>
+                  <span *ngIf="!createLoading">Create</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </ng-template>
+      </tr>
+    </tbody>
+  </table>
+</div>

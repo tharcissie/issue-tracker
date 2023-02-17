@@ -7,6 +7,6 @@ export interface User {
     'representative': string,
     'isadmin': boolean,
     'projects': string[],
-    'passcode?': number,
-    'token': string
+    'passcode'?: number,
+    'token'?: string
 }

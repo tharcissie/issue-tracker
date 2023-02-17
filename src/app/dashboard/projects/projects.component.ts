@@ -23,4 +23,14 @@ export class ProjectsComponent implements OnInit {
     })
   }
 
+  refreshProjects() {
+    this.ProjectService.clearCache();
+    this.ProjectService.getProjects().subscribe({
+      next: data => {
+        this.projects = data.data
+      },
+      error: err => this.errorMessage = err
+    })
+  }
+
 }

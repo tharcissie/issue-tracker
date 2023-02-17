@@ -1,24 +1,32 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable } from 'rxjs';
+import { catchError, map, Observable, shareReplay } from 'rxjs';
 import { Projects } from 'src/app/interfaces/Projects';
 import { HandleError } from '../../handleError';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProjectService {
 
-  url = 'http://localhost:4000/api/v3/projects'
+  url = 'http://localhost:4000/api/v3/projects';
+  private cachedProjects$: Observable<Projects> | null ;
 
-
-  constructor(private http: HttpClient, private handleError: HandleError) { }
+  constructor(private http: HttpClient, private handleError: HandleError) {}
 
   getProjects(): Observable<Projects> {
-    return this.http.get<Projects>(this.url)
-      .pipe(
+    if (!this.cachedProjects$) {
+      this.cachedProjects$ = this.http.get<Projects>(this.url).pipe(
+        map((response) => response),
+        shareReplay(1),
         catchError(this.handleError.handleError)
       );
+    }
+    return this.cachedProjects$;
+  }
+
+  clearCache() {
+    this.cachedProjects$ = null;
   }
 
 }

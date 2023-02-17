@@ -1,8 +1,146 @@
-<div class="row">
-    <div class="col-md-4 mt-3" *ngFor="let data of cardData">
-        <app-dashboard-card [icon] ="data.icon" [label] = 'data.label' [number] = 'data.number'></app-dashboard-card>
-    </div> 
+<div class="row justify-content-between" *ngIf="userData.isadmin">
+  <div class="col-md mt-3">
+    <app-dashboard-card
+      icon="fa fa-users fa-2x iconColor"
+      label="Users"
+      [number]="userNumber"
+    ></app-dashboard-card>
+  </div>
+  <div class="col-md mt-3">
+    <app-dashboard-card
+      icon="fa fa-file fa-2x iconColor"
+      label="Projects"
+      [number]="projectNumber"
+    ></app-dashboard-card>
+  </div>
+  <div class="col-md mt-3">
+    <app-dashboard-card
+      icon="fa fa-bug  fa-2x iconColor"
+      label="Issues"
+      [number]="issueNumber"
+    ></app-dashboard-card>
+  </div>
 </div>
-<div  class="card p-5 mt-5">
-    <canvasjs-chart [options]="chartOptions" [styles]="{width: '85%', height:'360px'}"></canvasjs-chart>    
-</div> 
+<div class="card p-5 mt-5" *ngIf="userData.isadmin">
+  <canvasjs-chart
+    [options]="chartOptions"
+    [styles]="{ width: '85%', height: '360px' }"
+  ></canvasjs-chart>
+</div>
+
+<div *ngIf="!userData.isadmin">
+  <h3>Welcome {{ userData.first_name }} {{ userData.last_name }}!</h3>
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-6 card p-3">
+      <div class="card-header">
+        <h2 class="text-center">Project</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h6><b>Name:</b></h6>
+          </div>
+          <div class="col-md-6">
+            <p>{{ userProject?.name }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <h6><b>Key:</b></h6>
+          </div>
+          <div class="col-md-6">
+            <p>{{ userProject?.key }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <h6><b>Project Type Key:</b></h6>
+          </div>
+          <div class="col-md-6">
+            <p>{{ userProject?.projectTypeKey }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <h6><b>Style:</b></h6>
+          </div>
+          <div class="col-md-6">
+            <p>{{ userProject?.style }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <h6><b>Number of Issues:</b></h6>
+          </div>
+          <div class="col-md-6">
+            <p>{{projectIssueNumber}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer d-flex">
+        <button
+          class="btn btn-primary btn-sm btn-rounded mx-3"
+          routerLink="/issues"
+        >
+          View Issues
+        </button>
+        <button
+          class="btn btn-primay btn-sm btn-rounded"
+          (click)="createIssueModal(myModal6)"
+        >
+          Report Issue
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #myModal6>
+  <div class="modal-header">
+    <h4 class="modal-title">Create An Issue</h4>
+    <a role="button" class="close" aria-label="Close" (click)="closeModal()">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </a>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="myForm" (ngSubmit)="createIssue(userProjectId)">
+      <div class="form-group p-3">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          id="title"
+          class="form-control"
+          formControlName="title"
+        />
+      </div>
+      <div class="form-group p-3">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          class="form-control"
+          formControlName="description"
+        ></textarea>
+      </div>
+      <div class="d-flex justify-content-end p-3 mt-2">
+        <button
+          type="button"
+          class="btn btn-dark-outline mx-3"
+          (click)="closeModal()"
+        >
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-primary">
+          <span *ngIf="createLoading">
+            <span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Loading...
+          </span>
+          <span *ngIf="!createLoading">Create</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>

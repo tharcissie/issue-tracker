@@ -1,1 +1,5 @@
-<p>issues works!</p>
+<div class="card p-3 mb-2 text-center"><h3>Issues</h3></div>
+<app-issue-table
+  [data]="issues"
+  (deleteIssueClick)="onDeleteIssue($event)"
+></app-issue-table>

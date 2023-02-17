@@ -1,0 +1,225 @@
+<div class="card p-5 table-responsive">
+  <table class="table table-hover text-nowrap">
+    <thead>
+      <tr>
+        <th scope="col"><b>Title</b></th>
+        <th scope="col" *ngIf="isAdmin"><b>Project</b></th>
+        <th scope="col"><b>Created At</b></th>
+        <th scope="col"><b>Created By</b></th>
+        <th scope="col"><b>Description</b></th>
+        <th scope="col" *ngIf="isAdmin">
+          <b
+            >Actions
+            <span
+              *ngIf="sendingToJiraLoading"
+              class="spinner-border spinner-border-sm mx-2 text-success"
+              role="status"
+              aria-hidden="true"
+            ></span>
+          </b>
+        </th>
+      </tr>
+    </thead>
+    <tbody *ngIf="isAdmin">
+      <tr *ngFor="let item of data">
+        <th scope="row">{{ item.title }}</th>
+        <td *ngIf="isAdmin">
+          {{ filterProject(projects, item.projectid) | json }}
+        </td>
+        <td>{{ item.idate | date }}</td>
+        <td>{{ item.first_name }} {{ item.last_name }}</td>
+        <td>
+          <button
+            class="btn btn-rounded btn-info"
+            (click)="openDeleteModal(myModal2)"
+          >
+            View Description
+          </button>
+        </td>
+        <td *ngIf="isAdmin">
+          <div class="d-flex"></div>
+          <!-- <a
+            role="button"
+            class="text-success mx-3"
+            (click)="updateIssueModal(myModal1, item)"
+          >
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          </a> -->
+          <a
+            role="button"
+            class="text-danger"
+            (click)="openDeleteModal(myModal)"
+          >
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </a>
+          <button
+            class="mx-3 btn btn-sm btn-rounded btn-outline-success"
+            (click)="sendToJira(item.title, item.description, item.projectid)"
+          >
+            <span>Send To jira</span>
+          </button>
+        </td>
+        <ng-template #myModal>
+          <div class="modal-header">
+            <h4 class="modal-title">Delete</h4>
+            <a
+              role="button"
+              class="close"
+              aria-label="Close"
+              (click)="closeModal()"
+            >
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete {{ item.title }}
+          </div>
+          <div class="d-flex justify-content-end p-3">
+            <button
+              type="button"
+              class="btn btn-dark-outline mx-3"
+              (click)="closeModal()"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="deleteIssue(item.id)"
+            >
+              <span *ngIf="deleteLoading">
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Loading...
+              </span>
+              <span *ngIf="!deleteLoading">Delete</span>
+            </button>
+          </div>
+        </ng-template>
+        <ng-template #myModal1>
+          <div class="modal-header">
+            <h4 class="modal-title">Update Issue</h4>
+            <a
+              role="button"
+              class="close"
+              aria-label="Close"
+              (click)="closeModal()"
+            >
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="updateForm" (ngSubmit)="updateIssue(item.id)">
+              <div class="form-group">
+                <label for="title">Title</label>
+                <input
+                  type="text"
+                  id="title"
+                  class="form-control"
+                  formControlName="title"
+                />
+              </div>
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea
+                  id="description"
+                  class="form-control"
+                  formControlName="description"
+                ></textarea>
+              </div>
+
+              <!-- <div class="form-group">
+                <label for="file">File</label>
+                <input
+                  type="file"
+                  id="file"
+                  class="form-control-file"
+                  (change)="onFileSelected($event)"
+                />
+              </div> -->
+              <div class="d-flex justify-content-end p-3">
+                <button
+                  type="button"
+                  class="btn btn-dark-outline mx-3"
+                  (click)="closeModal()"
+                >
+                  Cancel
+                </button>
+                <button type="submit" class="btn btn-primary">Update</button>
+              </div>
+            </form>
+          </div>
+        </ng-template>
+        <ng-template #myModal2>
+          <div class="modal-header">
+            <h4 class="modal-title">{{ item.title }}</h4>
+            <a
+              role="button"
+              class="close"
+              aria-label="Close"
+              (click)="closeModal()"
+            >
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="modal-body">
+            <h6>{{ item.description }}</h6>
+            <div class="d-flex justify-content-end p-3">
+              <button
+                type="button"
+                class="btn btn-primary mx-3"
+                (click)="closeModal()"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </ng-template>
+      </tr>
+    </tbody>
+
+    <tbody *ngIf="!isAdmin">
+      <tr *ngFor="let item of userProjectIssues">
+        <th scope="row">{{ item.title }}</th>
+        <td>{{ item.idate | date }}</td>
+        <td>{{ item.first_name }} {{ item.last_name }}</td>
+        <td>
+          <button
+            class="btn btn-rounded btn-info"
+            (click)="openDeleteModal(myModal2)"
+          >
+            View Description
+          </button>
+        </td>
+        <ng-template #myModal2>
+          <div class="modal-header">
+            <h4 class="modal-title">{{ item.title }}</h4>
+            <a
+              role="button"
+              class="close"
+              aria-label="Close"
+              (click)="closeModal()"
+            >
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="modal-body">
+            <h6>{{ item.description }}</h6>
+            <div class="d-flex justify-content-end p-3">
+              <button
+                type="button"
+                class="btn btn-primary mx-3"
+                (click)="closeModal()"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </ng-template>
+      </tr>
+    </tbody>
+  </table>
+</div>

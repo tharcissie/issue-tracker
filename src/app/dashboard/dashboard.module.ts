@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -9,10 +9,14 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { IssuesComponent } from './issues/issues.component';
 import { UsersComponent } from './users/users.component';
-import { DashboardCardComponent } from './homepage/dashboard-card/dashboard-card.component';
+import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
 
 import * as CanvasJSAngularChart from '../../assets/canvasjs.angular.component';
-import { ModalComponent } from './modal/modal.component';
+import { ProjectTableComponent } from './components/project-table/project-table.component';
+import { UserTableComponent } from './components/user-table/user-table.component';
+import { IssueTableComponent } from './components/issue-table/issue-table.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ProfileComponent } from './profile/profile.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 @NgModule({
   declarations: [
@@ -25,13 +29,17 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     UsersComponent,
     DashboardCardComponent,
     CanvasJSChart,
-    ModalComponent,
+    ProjectTableComponent,
+    UserTableComponent,
+    IssueTableComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     DashboardRoutingModule,
-  ]
+    ModalModule.forRoot(),
+  ],
 })
-export class DashboardModule { }
+export class DashboardModule {}

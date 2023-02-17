@@ -25,11 +25,15 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './_guards/auth.guard';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { HandleError } from './core/handleError';
+import { ToastrModule } from 'ngx-toastr';
+import { SignupComponent } from './signup/signup.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +57,7 @@ import { HandleError } from './core/handleError';
     MdbTooltipModule,
     MdbValidationModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     AuthGuard,

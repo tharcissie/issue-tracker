@@ -7,7 +7,8 @@ export const navbarData = [
     {
         routeLink: 'projects',
         icon: 'fa fa-file fa-1x mx-3',
-        label: 'Projects'
+        label: 'Projects',
+        isAdminOnly: true
     },
     {
         routeLink: 'issues',
@@ -17,6 +18,7 @@ export const navbarData = [
     {
         routeLink: 'users',
         icon: 'fa fa-users  fa-1x mx-3',
-        label: 'Users'
+        label: 'Users',
+        isAdminOnly: true
     },
 ];
