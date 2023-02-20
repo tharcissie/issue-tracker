@@ -13,7 +13,6 @@ import { IssueService } from 'src/app/core/dashboard/issue/issue.service';
 import { Project } from 'src/app/interfaces/Project';
 import { ProjectService } from 'src/app/core/dashboard/project/project.service';
 import { ToastrService } from 'ngx-toastr';
-import { PaginationComponent } from '../pagination/pagination.component';
 
 @Component({
   selector: 'app-issue-table',
@@ -35,8 +34,6 @@ export class IssueTableComponent implements OnInit {
   isAdmin: boolean;
   userProjectId: number;
   userProjectIssues: any;
-
-  p: number = 1;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -126,7 +123,7 @@ export class IssueTableComponent implements OnInit {
   get displayedItems(): any[] {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
-    return this.data.slice(startIndex, endIndex);
+    return this.data.reverse().slice(startIndex, endIndex);
   }
 
   onPageChanged(page: number): void {

@@ -64,4 +64,17 @@ export class ProjectTableComponent {
   closeModal() {
     this.modalRef.hide();
   }
+
+  pageSize = 5;
+  currentPage = 1;
+
+  get displayedItems(): any[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    return this.data.reverse().slice(startIndex, endIndex);
+  }
+
+  onPageChanged(page: number): void {
+    this.currentPage = page;
+  }
 }
