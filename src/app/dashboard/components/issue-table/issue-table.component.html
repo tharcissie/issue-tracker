@@ -1,3 +1,4 @@
+
 <div class="card p-5 table-responsive">
   <table class="table table-hover text-nowrap">
     <thead>
@@ -21,7 +22,7 @@
       </tr>
     </thead>
     <tbody *ngIf="isAdmin">
-      <tr *ngFor="let item of data">
+      <tr *ngFor="let item of displayedItems">
         <th scope="row">{{ item.title }}</th>
         <td *ngIf="isAdmin">
           {{ filterProject(projects, item.projectid) | json }}
@@ -221,5 +222,7 @@
         </ng-template>
       </tr>
     </tbody>
+    <app-pagination [data]="data" [pageSize]="pageSize" (pageChanged)="onPageChanged($event)"></app-pagination>
+
   </table>
 </div>

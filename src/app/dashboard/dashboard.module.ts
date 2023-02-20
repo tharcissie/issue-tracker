@@ -1,6 +1,5 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
@@ -17,6 +16,8 @@ import { UserTableComponent } from './components/user-table/user-table.component
 import { IssueTableComponent } from './components/issue-table/issue-table.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ProfileComponent } from './profile/profile.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     UserTableComponent,
     IssueTableComponent,
     ProfileComponent,
+    PaginationComponent,
   ],
   imports: [
     CommonModule,
